@@ -36,7 +36,7 @@ function main(nb_ranks, read_file_path, save_file_name)
 
 	end
 
-	
+
 	w = w[:, :, 1:size(w)[3]-1, :] # small bug here...
 
 

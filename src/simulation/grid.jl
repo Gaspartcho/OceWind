@@ -20,7 +20,7 @@ function main(archinfo, world_size, show_grid = false)
 	Nx = Ny = Nz = world_size
 	Lx = Ly = 2Nx
 	Lz = Nx
-	
+
 	grid = RectilinearGrid(
 		archinfo.arch;
 		halo=(3, 3, 3),
@@ -30,11 +30,11 @@ function main(archinfo, world_size, show_grid = false)
 		y = (0, Ly),
 		z = (-Lz, 0)
 	)
-	
+
 	if show_grid
 		@show grid
 	end
-	
+
 	return grid
 
 end

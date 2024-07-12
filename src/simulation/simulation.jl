@@ -43,7 +43,7 @@ function main(archinfo, model, duration, filename, show_sim = false)
 			", Δt: ",
 			prettytime(sim.Δt)
 		)
-		
+
 
 		@info @sprintf(
 			"Rank %d | max(|w|) = %.1e ms⁻¹, wall time: %s",
@@ -60,7 +60,7 @@ function main(archinfo, model, duration, filename, show_sim = false)
 
 
 	# Create a NamedTuple with eddy viscosity
-	
+
 	u, v, w = model.velocities
 	T = model.tracers.T
 	P = model.pressures.pNHS
@@ -80,13 +80,13 @@ function main(archinfo, model, duration, filename, show_sim = false)
 		filename = filename,
 		overwrite_existing = true
 	)
-	
-	
+
+
 	if show_sim
 		@show simulation
 	end
-	
-	
+
+
 	return simulation
 
 

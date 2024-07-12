@@ -37,18 +37,18 @@ function main()
 
 	archinfo = Arch.main()
 	MPI.Barrier(archinfo.comm)
-	
+
 	grid = Grid.main(archinfo, world_size, show_objects)
 	MPI.Barrier(archinfo.comm)
-	
+
 	model = Model.main(archinfo, grid, show_objects)
 	MPI.Barrier(archinfo.comm)
-	
+
 	filename = string(filepath, archinfo.rank, ".nc")
-	
+
 	simulation = Sim.main(archinfo, model, duration, filename, show_objects)
 	MPI.Barrier(archinfo.comm)
-	
+
 	run!(simulation)
 	MPI.Barrier(archinfo.comm)
 

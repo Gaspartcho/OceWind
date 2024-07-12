@@ -32,14 +32,14 @@ const save_file_data = "results/data/formated_data.nc"
 function main()
 
 	#run(sim_command)
-    
+
     @info "Simulations completed!"
-    
+
     FormatData.main(nb_cores, save_file_sim, save_file_data)
-    
+
     #PlotData.main(data)
-    
-    
+
+
 end
 
 

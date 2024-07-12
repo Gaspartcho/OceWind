@@ -17,8 +17,8 @@ function main(archinfo, grid, show_model = false)
 	if archinfo.rank == 0
 		@info "Building $(archinfo.Nranks) models ..."
 	end
-	
-	
+
+
 	# Buoyancy
 
 	buoyancy = SeawaterBuoyancy(equation_of_state=LinearEquationOfState(thermal_expansion = 2e-4, haline_contraction = 8e-4))
@@ -77,15 +77,15 @@ function main(archinfo, grid, show_model = false)
 		closure = AnisotropicMinimumDissipation(),
 		boundary_conditions = (u=u_bcs, T=T_bcs, S=S_bcs)
 	)
-	
-	
+
+
 	if show_model
 		@show model
 	end
-	
-	
+
+
 	# == Initial Conditions ==
-	
+
 	# Random noise damped at top and bottom
 	Ξ(z) = randn() * z / model.grid.Lz * (1 + z / model.grid.Lz) # noise
 
@@ -97,10 +97,10 @@ function main(archinfo, grid, show_model = false)
 
 	# `set!` the `model` fields using functions or constants:
 	set!(model, u=uᵢ, w=uᵢ, T=Tᵢ, S=35)
-	
-	
+
+
 	return model
-	
+
 end
 
 

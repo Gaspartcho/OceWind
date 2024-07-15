@@ -15,4 +15,4 @@ Path to the project:
 
 ## Pour Bruno
 
-Pour tout ce qui est plot, il faut uttiliser le [notebook jupyter](Notebooks/other_awesome_notebook.ipynb)
+Pour tout ce qui est plot, il faut uttiliser le [notebook jupyter](Notebooks/graphs.ipynb)

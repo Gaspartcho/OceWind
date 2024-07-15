@@ -25,6 +25,7 @@ const sim_command = `$(mpiexec()) -n $nb_cores $(Base.julia_cmd()) --project src
 
 const save_file_sim = "results/data/ocean_wind_mixing_and_convection_rank"
 const save_file_data = "results/data/formated_data.nc"
+const save_fig_path = "results/visuals/figs_"
 
 
 # === Main Function
@@ -35,9 +36,11 @@ function main()
 
     @info "Simulations completed!"
 
-    FormatData.main(nb_cores, save_file_sim, save_file_data)
+    #FormatData.main(nb_cores, save_file_sim, save_file_data)
 
-    #PlotData.main(data)
+    PlotData.main(save_file_data, save_fig_path)
+
+    @info "All done!"
 
 
 end

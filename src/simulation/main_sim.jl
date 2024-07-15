@@ -24,7 +24,7 @@ include("simulation.jl")
 
 const filepath = "results/data/ocean_wind_mixing_and_convection_rank"
 const world_size = 64
-const duration = 80
+const duration = 120
 const show_objects = true
 
 

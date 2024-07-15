@@ -40,6 +40,9 @@ function main(nb_ranks, read_file_path, save_file_name)
 	w = w[:, :, 1:size(w)[3]-1, :] # small bug here...
 
 
+	@info "Pre-formating data..."
+
+
 	function to_bar(x)
 		dims = size(x)
 		tmp = sum(x, dims=(1, 2)) / (4 * dims[1] * dims[2])
@@ -67,7 +70,7 @@ function main(nb_ranks, read_file_path, save_file_name)
 	v_w_bar = to_bar(v_prime .* w_prime)
 
 
-	energy  = 0.5 * (to_bar(u_prime .* u_prime) + to_bar(v_prime .* v_prime) + to_bar(w_prime .* w_prime))
+	energy  = 0.5 * (to_bar(u_prime .^ 2) + to_bar(v_prime .^ 2) + to_bar(w_prime .^ 2))
 
 	u_P_bar = to_bar(u_prime .* P_prime)
 	v_P_bar = to_bar(v_prime .* P_prime)
@@ -117,9 +120,9 @@ function main(nb_ranks, read_file_path, save_file_name)
 			save_file_name,
 			varname,
 			start=[1, 1],
-			count=[-1, -1])
+			count=[-1, -1]
+		)
 	end
-
 
 	save_var(u_bar, "u_bar")
 	save_var(v_bar, "v_bar")

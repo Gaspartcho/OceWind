@@ -16,6 +16,8 @@ using NetCDF
 
 function main(filename, save_file_path)
 
+	@info "Plotting the data..."
+
 	u_bar = ncread(filename, "u_bar")
 	v_bar = ncread(filename, "v_bar")
 	w_bar = ncread(filename, "w_bar")

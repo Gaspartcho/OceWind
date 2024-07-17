@@ -23,8 +23,8 @@ include("simulation.jl")
 # === Constant Variables
 
 const filepath = "results/data/ocean_wind_mixing_and_convection_rank"
-const world_size = 64
-const duration = 120
+const world_size = 32
+const duration = 60
 const show_objects = false
 const time_result_path = "results/logs/time.txt"
 
@@ -52,12 +52,13 @@ function main()
 	t_rsim = @elapsed run!(simulation)
 	MPI.Barrier(archinfo.comm)
 
-
-	io = open(time_result_path, "a")
-	time_data = [archinfo.Nranks, world_size, duration, t_MPI, t_grid, t_model, t_csim, t_rsim]
-	write(io, join(map(string, time_data), "\t"))
-	write(io, "\n")
-	close(io)
+	if archinfo.rank == 0
+		io = open(time_result_path, "a")
+		time_data = [archinfo.Nranks, world_size, duration, t_MPI, t_grid, t_model, t_csim, t_rsim]
+		write(io, join(map(string, time_data), "\t"))
+		write(io, "\n")
+		close(io)
+	end
 
 end
 

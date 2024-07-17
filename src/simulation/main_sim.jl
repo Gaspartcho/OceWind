@@ -45,7 +45,7 @@ function main()
 	MPI.Barrier(archinfo.comm)
 
 	#filename = string(filepath, archinfo.rank, ".nc")
-	filename = string(filepath, runc(Int, rand()*10000), ".nc") #so I can run multiple in parallell
+	filename = string(filepath, trunc(Int, 1000*rand()), ".nc") #so I can run multiple in parallell
 
 	t_csim = @elapsed simulation = Sim.main(archinfo, model, duration, filename, show_objects)
 	MPI.Barrier(archinfo.comm)

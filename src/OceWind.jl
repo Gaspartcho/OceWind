@@ -32,13 +32,13 @@ const save_fig_path = "results/visuals/figs_"
 
 function main()
 
-	#run(sim_command)
+    run(sim_command)
 
     @info "Simulations completed!"
 
-    #FormatData.main(nb_cores, save_file_sim, save_file_data)
+    FormatData.main(nb_cores, save_file_sim, save_file_data)
 
-    PlotData.main(save_file_data, save_fig_path)
+    #PlotData.main(save_file_data, save_fig_path)
 
     @info "All done!"
 

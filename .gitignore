@@ -1,1 +1,4 @@
 results/data/ocean_wind_mixing_and_convection_rank*
+
+*.output
+*.error

@@ -25,7 +25,7 @@ function main(archinfo, model, duration, filename, show_sim = false)
 	# Time wizard
 
 	wizard = TimeStepWizard(cfl=1.0, max_change=1.1, max_Δt=1minute)
-	simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(10))
+	simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(50))
 
 
 	function progress(sim)

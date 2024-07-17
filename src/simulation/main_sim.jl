@@ -44,7 +44,8 @@ function main()
 	t_model = @elapsed model = Model.main(archinfo, grid, show_objects)
 	MPI.Barrier(archinfo.comm)
 
-	filename = string(filepath, archinfo.rank, ".nc")
+	#filename = string(filepath, archinfo.rank, ".nc")
+	filename = string(filepath, runc(Int, rand()*10000), ".nc") #so I can run multiple in parallell
 
 	t_csim = @elapsed simulation = Sim.main(archinfo, model, duration, filename, show_objects)
 	MPI.Barrier(archinfo.comm)

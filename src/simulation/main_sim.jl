@@ -25,8 +25,8 @@ include("simulation.jl")
 const filepath = "results/data/ocean_wind_mixing_and_convection_rank"
 const world_size = 64
 const duration = 120
-const show_objects = true
-
+const show_objects = false
+const time_result_path = "results/logs/time.txt"
 
 
 # === Main Function ===
@@ -35,22 +35,29 @@ function main()
 
 	Logging.global_logger(OceananigansLogger())
 
-	archinfo = Arch.main()
+	t_MPI = @elapsed archinfo = Arch.main()
 	MPI.Barrier(archinfo.comm)
 
-	grid = Grid.main(archinfo, world_size, show_objects)
+	t_grid = @elapsed grid = Grid.main(archinfo, world_size, show_objects)
 	MPI.Barrier(archinfo.comm)
 
-	model = Model.main(archinfo, grid, show_objects)
+	t_model = @elapsed model = Model.main(archinfo, grid, show_objects)
 	MPI.Barrier(archinfo.comm)
 
 	filename = string(filepath, archinfo.rank, ".nc")
 
-	simulation = Sim.main(archinfo, model, duration, filename, show_objects)
+	t_csim = @elapsed simulation = Sim.main(archinfo, model, duration, filename, show_objects)
 	MPI.Barrier(archinfo.comm)
 
-	run!(simulation)
+	t_rsim = @elapsed run!(simulation)
 	MPI.Barrier(archinfo.comm)
+
+
+	io = open(time_result_path, "a")
+	time_data = [archinfo.Nranks, world_size, duration, t_MPI, t_grid, t_model, t_csim, t_rsim]
+	write(io, join(map(string, time_data), "\t"))
+	write(io, "\n")
+	close(io)
 
 end
 

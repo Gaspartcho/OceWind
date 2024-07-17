@@ -36,7 +36,7 @@ function main()
 
     @info "Simulations completed!"
 
-    FormatData.main(nb_cores, save_file_sim, save_file_data)
+    #FormatData.main(nb_cores, save_file_sim, save_file_data)
 
     #PlotData.main(save_file_data, save_fig_path)
 

@@ -23,8 +23,8 @@ include("simulation.jl")
 # === Constant Variables
 
 const filepath = "results/data/ocean_wind_mixing_and_convection_rank"
-const world_size = 32
-const duration = 60
+const world_size = 128
+const duration = 120
 const show_objects = false
 const time_result_path = "results/logs/time.txt"
 
@@ -45,7 +45,7 @@ function main()
 	MPI.Barrier(archinfo.comm)
 
 	#filename = string(filepath, archinfo.rank, ".nc")
-	filename = string(filepath, trunc(Int, 1000*rand()), ".nc") #so I can run multiple in parallell
+	filename = string(filepath, trunc(Int, 100000*rand()), ".nc") #so I can run multiple in parallell
 
 	t_csim = @elapsed simulation = Sim.main(archinfo, model, duration, filename, show_objects)
 	MPI.Barrier(archinfo.comm)

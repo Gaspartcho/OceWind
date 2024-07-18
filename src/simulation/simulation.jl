@@ -25,7 +25,7 @@ function main(archinfo, model, duration, filename, show_sim = false)
 	# Time wizard
 
 	wizard = TimeStepWizard(cfl=1.0, max_change=1.1, max_Δt=1minute)
-	simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(50))
+	simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(10))
 
 
 	function progress(sim)
@@ -56,7 +56,7 @@ function main(archinfo, model, duration, filename, show_sim = false)
 
 	end
 
-	add_callback!(simulation, progress, IterationInterval(20))
+	add_callback!(simulation, progress, IterationInterval(50))
 
 
 	# Create a NamedTuple with eddy viscosity

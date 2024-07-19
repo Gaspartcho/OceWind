@@ -17,10 +17,9 @@ include("plot_data.jl")
 
 # === Main variables ===
 
-const nb_cores = 1
 const path_script_sim = "simulation/main_sim.jl"
 
-const sim_command = `$(mpiexec()) -n $nb_cores $(Base.julia_cmd()) --project src/$path_script_sim`
+const sim_command = `$(Base.julia_cmd()) --project src/$path_script_sim`
 
 
 const save_file_sim = "results/data/ocean_wind_mixing_and_convection_rank"

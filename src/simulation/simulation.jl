@@ -17,7 +17,7 @@ using Printf
 function main(archinfo, model, duration, filename, show_sim = false)
 
 	if archinfo.rank == 0
-		@info "Building $(archinfo.Nranks) simulations ..."
+		@info "Building simulation ..."
 	end
 
 	simulation = Simulation(model, Δt=10.0, stop_time=duration * minutes)
@@ -30,12 +30,7 @@ function main(archinfo, model, duration, filename, show_sim = false)
 
 	function progress(sim)
 
-		comm = sim.model.grid.architecture.communicator
-		rank = MPI.Comm_rank(comm)
-
-		rank == 0 && println("")
-
-		rank == 0 && @info string(
+		@info string(
 			"Iteration: ",
 			iteration(sim),
 			", time: ",
@@ -46,8 +41,7 @@ function main(archinfo, model, duration, filename, show_sim = false)
 
 
 		@info @sprintf(
-			"Rank %d | max(|w|) = %.1e ms⁻¹, wall time: %s",
-			rank,
+			"max(|w|) = %.1e ms⁻¹, wall time: %s",
 			maximum(abs, sim.model.velocities.w),
 			prettytime(sim.run_wall_time)
 		)

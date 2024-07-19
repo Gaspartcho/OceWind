@@ -12,11 +12,9 @@ using Oceananigans.Units: hour
 
 # === Main Function ===
 
-function main(archinfo, grid, show_model = false)
+function main(grid, show_model = false)
 
-	if archinfo.rank == 0
-		@info "Building $(archinfo.Nranks) models ..."
-	end
+	@info "Building model ..."
 
 
 	# Buoyancy

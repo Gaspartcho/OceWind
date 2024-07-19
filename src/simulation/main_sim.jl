@@ -50,12 +50,12 @@ function main()
 	t_csim = @elapsed simulation = Sim.main(archinfo, model, duration, filename, show_objects)
 	MPI.Barrier(archinfo.comm)
 
-	t_rsim = @elapsed run!(simulation)
+	run!(simulation)
 	MPI.Barrier(archinfo.comm)
 
 	if archinfo.rank == 0
 		io = open(time_result_path, "a")
-		time_data = [archinfo.Nranks, world_size, duration, t_MPI, t_grid, t_model, t_csim, t_rsim]
+		time_data = [archinfo.Nranks, world_size, duration, t_MPI, t_grid, t_model, t_csim, simulation.run_wall_time, iteration(simulation)]
 		write(io, join(map(string, time_data), "\t"))
 		write(io, "\n")
 		close(io)

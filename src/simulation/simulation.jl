@@ -5,7 +5,6 @@ module Sim
 
 # === Importing libraries ===
 
-using MPI
 using Oceananigans
 using Oceananigans.Units: minute, minutes, hour
 using Printf
@@ -14,11 +13,9 @@ using Printf
 
 # === Main Function ===
 
-function main(archinfo, model, duration, filename, show_sim = false)
+function main(model, duration, filename, show_sim = false)
 
-	if archinfo.rank == 0
-		@info "Building simulation ..."
-	end
+	@info "Building simulation ..."
 
 	simulation = Simulation(model, Δt=10.0, stop_time=duration * minutes)
 

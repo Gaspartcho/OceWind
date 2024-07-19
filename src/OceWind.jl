@@ -5,8 +5,6 @@ module OceWind
 # === Importing libraries ===
 
 using Logging
-using MPI
-
 
 
 # === Importing Sub-Scripts ===

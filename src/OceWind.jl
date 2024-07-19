@@ -17,7 +17,7 @@ include("plot_data.jl")
 
 # === Main variables ===
 
-const nb_cores = 4
+const nb_cores = 1
 const path_script_sim = "simulation/main_sim.jl"
 
 const sim_command = `$(mpiexec()) -n $nb_cores $(Base.julia_cmd()) --project src/$path_script_sim`

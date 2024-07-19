@@ -23,8 +23,8 @@ include("simulation.jl")
 # === Constant Variables
 
 const filepath = "results/data/ocean_wind_mixing_and_convection_rank"
-const world_size = 128
-const duration = 120
+const world_size = 32
+const duration = 60
 const show_objects = false
 const time_result_path = "results/logs/time.txt"
 

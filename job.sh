@@ -3,7 +3,7 @@
 #SBATCH -J TestOceananigansCPU
 
 #SBATCH --nodes=1
-#SBATCH --ntasks=4
+#SBATCH --ntasks=1
 #SBATCH --account=meom
 
 #SBATCH --mem=10000

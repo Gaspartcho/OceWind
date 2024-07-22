@@ -19,8 +19,8 @@ function main(filename, save_file_name)
 	u = NetCDF.open(filename, "u")
 	v = NetCDF.open(filename, "v")
 	w = NetCDF.open(filename, "w")
-	T = NetCDF.open(filename, "T")
-	P = NetCDF.open(filename, "P")
+	#T = NetCDF.open(filename, "T")
+	#P = NetCDF.open(filename, "P")
 
 
 	#w = w[:, :, 1:size(w)[3]-1, :] # small bug here...
@@ -40,27 +40,27 @@ function main(filename, save_file_name)
 	u_bar = to_bar(u)
 	v_bar = to_bar(v)
 	w_bar = to_bar(w)
-	T_bar = to_bar(T)
-	P_bar = to_bar(P)
+	#T_bar = to_bar(T)
+	#P_bar = to_bar(P)
 
 
 	u_prime = u - u_bar
 	v_prime = v - v_bar
 	w_prime = w - w_bar
-	T_prime = T - T_bar
-	P_prime = P - P_bar
+	#T_prime = T - T_bar
+	#P_prime = P - P_bar
 
 
-	T_w_bar = to_bar(T_prime .* w_prime)
+	#T_w_bar = to_bar(T_prime .* w_prime)
 	u_w_bar = to_bar(u_prime .* w_prime)
 	v_w_bar = to_bar(v_prime .* w_prime)
 
 
 	energy  = 0.5 * (to_bar(u_prime .^ 2) + to_bar(v_prime .^ 2) + to_bar(w_prime .^ 2))
 
-	u_P_bar = to_bar(u_prime .* P_prime)
-	v_P_bar = to_bar(v_prime .* P_prime)
-	w_P_bar = to_bar(w_prime .* P_prime)
+	#u_P_bar = to_bar(u_prime .* P_prime)
+	#v_P_bar = to_bar(v_prime .* P_prime)
+	#w_P_bar = to_bar(w_prime .* P_prime)
 
 
 	if isfile(save_file_name)
@@ -87,15 +87,15 @@ function main(filename, save_file_name)
 	create_save_var(size(u_bar), "u_bar")
 	create_save_var(size(v_bar), "v_bar")
 	create_save_var(size(w_bar), "w_bar")
-	create_save_var(size(T_bar), "T_bar")
-	create_save_var(size(P_bar), "P_bar")
+	#create_save_var(size(T_bar), "T_bar")
+	#create_save_var(size(P_bar), "P_bar")
 
-	create_save_var(size(T_w_bar), "T_w_bar")
+	#create_save_var(size(T_w_bar), "T_w_bar")
 	create_save_var(size(u_w_bar), "u_w_bar")
 	create_save_var(size(v_w_bar), "v_w_bar")
-	create_save_var(size(u_P_bar), "u_P_bar")
-	create_save_var(size(v_P_bar), "v_P_bar")
-	create_save_var(size(w_P_bar), "w_P_bar")
+	#create_save_var(size(u_P_bar), "u_P_bar")
+	#create_save_var(size(v_P_bar), "v_P_bar")
+	#create_save_var(size(w_P_bar), "w_P_bar")
 
 	create_save_var(size(energy), "energy")
 
@@ -113,15 +113,15 @@ function main(filename, save_file_name)
 	save_var(u_bar, "u_bar")
 	save_var(v_bar, "v_bar")
 	save_var(w_bar, "w_bar")
-	save_var(T_bar, "T_bar")
-	save_var(P_bar, "P_bar")
+	#save_var(T_bar, "T_bar")
+	#save_var(P_bar, "P_bar")
 
-	save_var(T_w_bar, "T_w_bar")
+	#save_var(T_w_bar, "T_w_bar")
 	save_var(u_w_bar, "u_w_bar")
 	save_var(v_w_bar, "v_w_bar")
-	save_var(u_P_bar, "u_P_bar")
-	save_var(v_P_bar, "v_P_bar")
-	save_var(w_P_bar, "w_P_bar")
+	#save_var(u_P_bar, "u_P_bar")
+	#save_var(v_P_bar, "v_P_bar")
+	#save_var(w_P_bar, "w_P_bar")
 
 	save_var(energy, "energy")
 

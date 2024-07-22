@@ -35,7 +35,7 @@ function main()
 
     FormatData.main(save_file_sim, save_file_data)
 
-    PlotData.main(save_file_data, save_fig_path)
+    #PlotData.main(save_file_data, save_fig_path)
 
     @info "All done!"
 

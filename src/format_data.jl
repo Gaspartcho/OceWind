@@ -11,30 +11,16 @@ using NetCDF
 
 # === Main Function ===
 
-function main(nb_ranks, read_file_path, save_file_name)
+function main(filename, save_file_name)
 
 	@info "Importing Data..."
 
-	filename = string(read_file_path, 0, ".nc")
 
 	u = ncread(filename, "u")
 	v = ncread(filename, "v")
 	w = ncread(filename, "w")
 	T = ncread(filename, "T")
 	P = ncread(filename, "P")
-
-
-	for i in 1:nb_ranks-1
-
-		filename = string(read_file_path, i, ".nc")
-
-		u = cat(u, ncread(filename, "u"), dims=1)
-		v = cat(v, ncread(filename, "v"), dims=1)
-		w = cat(w, ncread(filename, "w"), dims=1)
-		T = cat(T, ncread(filename, "T"), dims=1)
-		P = cat(P, ncread(filename, "P"), dims=1)
-
-	end
 
 
 	w = w[:, :, 1:size(w)[3]-1, :] # small bug here...

@@ -23,7 +23,7 @@ function main(filename, save_file_name)
 	#P = ncread(filename, "P")
 
 
-	w = w[:, :, 1:size(w)[3]-1, :] # small bug here...
+	#w = w[:, :, 1:size(w)[3]-1, :] # small bug here...
 
 
 	@info "Pre-formating data..."
@@ -97,7 +97,7 @@ function main(filename, save_file_name)
 	#create_save_var(size(v_P_bar), "v_P_bar")
 	#create_save_var(size(w_P_bar), "w_P_bar")
 
-	create_save_var(size(energy), "energy")
+	#create_save_var(size(energy), "energy")
 
 
 	function save_var(var, varname)

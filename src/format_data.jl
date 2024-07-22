@@ -16,7 +16,7 @@ function main(filename, save_file_name)
 	@info "Importing Data..."
 
 
-	u = ncread(filename, "u")
+	u = NetCDF.open(filename, "u")
 	#v = ncread(filename, "v")
 	#w = ncread(filename, "w")
 	#T = ncread(filename, "T")

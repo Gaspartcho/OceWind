@@ -23,16 +23,26 @@ function main(filename, save_file_name)
 	#P = NetCDF.open(filename, "P")
 
 
-	#w = w[:, :, 1:size(w)[3]-1, :] # small bug here...
+	w = w[:, :, 1:size(w)[3]-1, :] # small bug here...
 
 
 	@info "Pre-formating data..."
 
 
 	function to_bar(x)
+		return (sum(x, dims=(1, 2)) / (128*128))[1, 1, :, :]
+	end
+	
+	function to_prime(x, x_bar)
 		dims = size(x)
-		tmp = sum(x, dims=(1, 2)) / (128*128)
-		return repeat(tmp, outer = (dims[1], dims[2], 1, 1))
+		tmp = zeros(dims)
+		for i in 1:dims[1]
+			for j in 1:dims[2]
+				tmp[:, :, i, j] = x[:, :, i, j] - x_bar[i, j]
+			end
+		end
+		
+		return tmp
 
 	end
 
@@ -44,11 +54,11 @@ function main(filename, save_file_name)
 	#P_bar = to_bar(P)
 
 
-	u_prime = u - u_bar
-	v_prime = v - v_bar
-	w_prime = w - w_bar
-	#T_prime = T - T_bar
-	#P_prime = P - P_bar
+	u_prime = to_prime(u, u_bar)
+	v_prime = to_prime(v, v_bar)
+	w_prime = to_prime(w, w_bar)
+	#T_prime = to_prime(T, T_bar)
+	#P_prime = to_prime(P, P_bar)
 
 
 	#T_w_bar = to_bar(T_prime .* w_prime)
@@ -102,7 +112,7 @@ function main(filename, save_file_name)
 
 	function save_var(var, varname)
 		ncwrite(
-			Array(transpose(var[1, 1, :, :])),
+			Array(transpose(var)),
 			save_file_name,
 			varname,
 			start=[1, 1],

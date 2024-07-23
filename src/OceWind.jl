@@ -20,7 +20,7 @@ const path_script_sim = "simulation/main_sim.jl"
 const sim_command = `$(Base.julia_cmd()) --project src/$path_script_sim`
 
 
-const save_file_sim = "results/data/ocean_wind_mixing_and_convection2542.nc"
+const save_file_sim = "results/data/ocean_wind_mixing_and_convection20597.nc"
 const save_file_data = "results/data/formated_data.nc"
 const save_fig_path = "results/visuals/figs_"
 

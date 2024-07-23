@@ -1,5 +1,5 @@
 results/data/ocean_wind_mixing_and_convection*
 
 
-*.output
-*.error
+results/logs/*.output
+results/logs/*.error

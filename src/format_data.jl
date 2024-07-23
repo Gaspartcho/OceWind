@@ -19,6 +19,8 @@ function main(filename, save_file_name)
 
 	ds = open_dataset(filename, driver=:netcdf)
 	
+	@show ds.u
+	
 	function format_axes(x)
 		axlist = (
 			Dim{:xC}(val(x.axes[1])),
@@ -27,20 +29,22 @@ function main(filename, save_file_name)
 			Dim{:Ti}(val(x.axes[4]))
 		)
 		
-		return YAXArray(axlist, x.data, x.properties)
+		return YAXArray(axlist, x, x.properties)
 	end
 	
-	u = format_axes(ds.u)
+	@show u = format_axes(ds.u)
 	v = format_axes(ds.v)
 	w = format_axes(ds.w[:, :, 2:end, :])
 	T = format_axes(ds.T)
 	P = format_axes(ds.P)
+	
+	@show u
 
 	@info "Pre-formating data..."
 
 
 	function to_bar(x)
-		return mapslices(sum, x, dims=(x.axes[1], x.axes[2])) ./ (128*128)
+		return YAXArrays.mapslices(sum, x, dims=("xC", "yC")) ./ (128*128)
 	end
 	
 	function to_prime(x, x_bar)
@@ -62,7 +66,7 @@ function main(filename, save_file_name)
 	P_prime = to_prime(P, P_bar)
 
 
-	T_w_bar = to_bar(T_prime .* w_prime)
+	@show T_w_bar = to_bar(T_prime .* w_prime)
 	u_w_bar = to_bar(u_prime .* w_prime)
 	v_w_bar = to_bar(v_prime .* w_prime)
 
@@ -99,7 +103,7 @@ function main(filename, save_file_name)
 		energy = transpose(energy)
 	)
 	
-	@ "Saving the formated data..."
+	@info "Saving the formated data..."
 	
 	savedataset(final_ds, path=save_file_name, driver=:netcdf)
 

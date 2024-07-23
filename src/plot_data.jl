@@ -35,38 +35,24 @@ function main(filename, save_file_path)
 	
 	
 	
-	function log_abs(data)
-
-		if data == 0
-			return 0
-		end
-
-		return log(abs(data))
-
-	end
-	
-	
 	function plot_data(data, title)
+        fig = Figure(size = (800, 700))
+        
+        ax_h = Axis(fig[1, 1:2]; title=title, xlabel = "t (minutes)", ylabel = "z (meters)")
 
-		fig = Figure(size = (800, 700))
-		
-		ax_h = Axis(fig[1, 1:2]; title=title, xlabel = "t (minutes)", ylabel = "z (meters)")
+        dims = size(data)
+        
+        hm_w = heatmap!(ax_h, 1:dims[1], LinRange(-128, 0, dims[2]), data)
+        Colorbar(fig[1, 3], hm_w)
 
-		dims = size(data)
-		
-		hm_w = heatmap!(ax_h, 1:dims[1], -dims[2]:0, data)
-		Colorbar(fig[1, 3], hm_w)
-
-		ax_l = Axis(fig[2, 1]; title = L"%$title at t = %$(dims[1]) mins", xlabel = "z (meters)", ylabel = title)
-		lines!(ax_l, -dims[2]:-1, data[dims[1], :])
+        ax_l = Axis(fig[2, 1:2]; title = L"%$(title) at t = %$(dims[1]) mins", xlabel = title, ylabel = "z (meters)")
+        lines!(ax_l, data[end, :], LinRange(-128, 0, dims[2]))
 
 
-		ax_ol = Axis(fig[2, 2]; title = L"log(|%$title|) at t = %$(dims[1]) mins", xlabel = "z (meters)", ylabel = title)
-		lines!(ax_ol, -dims[2]:-1, log_abs.(data[dims[1], :]))
+        return fig
 
-		return fig
 
-	end
+    end
 	
 	
 	save(save_file_path * "u_bar" * ".png", plot_data(u_bar, L"\bar{u}"))

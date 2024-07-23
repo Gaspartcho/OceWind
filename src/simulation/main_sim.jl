@@ -33,22 +33,15 @@ function main()
 
 	Logging.global_logger(OceananigansLogger())
 
-	t_grid = @elapsed grid = Grid.main(world_size, show_objects)
+	grid = Grid.main(world_size, show_objects)
 
-	t_model = @elapsed model = Model.main(grid, show_objects)
+	model = Model.main(grid, show_objects)
 
-	#filename = string(filepath, archinfo.rank, ".nc")
-	filename = string(filepath, trunc(Int, 100000*rand()), ".nc") #so I can run multiple in parallell
+	filename = string(filepath, ".nc") #so I can run multiple in parallell
 
-	t_csim = @elapsed simulation = Sim.main(model, duration, filename, show_objects)
+	simulation = Sim.main(model, duration, filename, show_objects)
 
 	run!(simulation)
-
-	io = open(time_result_path, "a")
-	time_data = [world_size, duration, t_grid, t_model, t_csim, simulation.run_wall_time, iteration(simulation)]
-	write(io, join(map(string, time_data), "\t"))
-	write(io, "\n")
-	close(io)
 
 end
 

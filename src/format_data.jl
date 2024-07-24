@@ -1,4 +1,8 @@
 
+# This method is far slower than the other ones, but has the advantage of
+# using a grealty reduced amount of memory.
+# Necessary when dealing with large files.
+
 
 module FormatData
 

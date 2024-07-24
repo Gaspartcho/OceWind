@@ -41,14 +41,16 @@ The following need to be installed on your computer first:
 
 Then, run the following commands: 
 
-```
+```sh
 git clone https://github.com/Gaspartcho/OceWind.git
 cd OceWind
 julia --project=. -e "using Pkg; Pkg.instantiate()"
 ```
 
-Once the project has finished pre-compiling, you can run it with:
+Once the project has finished pre-compiling, you can run it with the following command:
 
-`julia --project=. src/OceWind.jl`
+```sh
+julia --project=. src/OceWind.jl
+```
 
 Warning: the Oceananigans

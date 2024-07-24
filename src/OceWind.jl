@@ -10,7 +10,7 @@ using Logging
 # === Importing Sub-Scripts ===
 
 include("format_data.jl")
-#include("plot_data.jl")
+include("plot_data.jl")
 
 
 # === Main variables ===
@@ -33,9 +33,9 @@ function main()
 
     @info "Simulations completed!"
 
-    FormatData.main(save_file_sim, save_file_data)
+    #FormatData.main(save_file_sim, save_file_data)
 
-    #PlotData.main(save_file_data, save_fig_path)
+    PlotData.main(save_file_data, save_fig_path)
 
     @info "All done!"
 

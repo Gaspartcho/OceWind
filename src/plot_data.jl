@@ -32,29 +32,28 @@ function main(filename, save_file_path)
 	w_P_bar = ncread(filename, "w_P_bar")
 
 	energy = ncread(filename, "energy")
-	
-	
-	
+
+
+
 	function plot_data(data, title)
-        fig = Figure(size = (800, 700))
-        
-        ax_h = Axis(fig[1, 1:2]; title=title, xlabel = "t (minutes)", ylabel = "z (meters)")
 
-        dims = size(data)
-        
-        hm_w = heatmap!(ax_h, 1:dims[1], LinRange(-128, 0, dims[2]), data)
-        Colorbar(fig[1, 3], hm_w)
+		fig = Figure(size = (800, 700))
 
-        ax_l = Axis(fig[2, 1:2]; title = L"%$(title) at t = %$(dims[1]) mins", xlabel = title, ylabel = "z (meters)")
-        lines!(ax_l, data[end, :], LinRange(-128, 0, dims[2]))
+		ax_h = Axis(fig[1, 1:2]; title=title, xlabel = "t (minutes)", ylabel = "z (meters)")
+
+		dims = size(data)
+
+		hm_w = heatmap!(ax_h, 1:dims[1], LinRange(-128, 0, dims[2]), data)
+		Colorbar(fig[1, 3], hm_w)
+
+		ax_l = Axis(fig[2, 1:2]; title = L"%$(title) at t = %$(dims[1]) mins", xlabel = title, ylabel = "z (meters)")
+		lines!(ax_l, data[end, :], LinRange(-128, 0, dims[2]))
+
+		return fig
+
+	end
 
 
-        return fig
-
-
-    end
-	
-	
 	save(save_file_path * "u_bar" * ".png", plot_data(u_bar, L"\bar{u}"))
 	save(save_file_path * "v_bar" * ".png", plot_data(v_bar, L"\bar{v}"))
 	save(save_file_path * "w_bar" * ".png", plot_data(w_bar, L"\bar{w}"))

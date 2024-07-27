@@ -9,7 +9,7 @@ using Logging
 
 # === Importing Sub-Scripts ===
 
-include("format_data.jl")
+#include("format_data.jl")
 #include("plot_data.jl")
 
 
@@ -28,12 +28,14 @@ const save_fig_path = "results/visuals/figs_"
 # === Main Function
 
 function main()
-
-    #run(sim_command)
+	
+    for _ in 1:5
+       run(sim_command)
+    end
 
     @info "Simulations completed!"
 
-    FormatData.main(save_file_sim, save_file_data)
+    #FormatData.main(save_file_sim, save_file_data)
 
     #PlotData.main(save_file_data, save_fig_path)
 

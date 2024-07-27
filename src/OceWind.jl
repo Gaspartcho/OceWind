@@ -11,13 +11,13 @@ using MPI
 
 # === Importing Sub-Scripts ===
 
-include("format_data.jl")
-include("plot_data.jl")
+#include("format_data.jl")
+#include("plot_data.jl")
 
 
 # === Main variables ===
 
-const nb_cores = 1
+const nb_cores = 32
 const path_script_sim = "simulation/main_sim.jl"
 
 const sim_command = `$(mpiexec()) -n $nb_cores $(Base.julia_cmd()) --project src/$path_script_sim`

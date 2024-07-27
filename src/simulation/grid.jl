@@ -18,17 +18,15 @@ function main(archinfo, world_size, show_grid = false)
 	end
 
 	Nx = Ny = Nz = world_size
-	Lx = Ly = 2Nx
-	Lz = Nx
 
 	grid = RectilinearGrid(
 		archinfo.arch;
 		halo=(3, 3, 3),
 		topology = (Periodic, Periodic, Bounded),
 		size = (Nx, Ny, Nz),
-		x = (0, Lx),
-		y = (0, Ly),
-		z = (-Lz, 0)
+		x = (0, 128),
+		y = (0, 128),
+		z = (-128, 0)
 	)
 
 	if show_grid

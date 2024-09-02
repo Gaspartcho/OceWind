@@ -9,12 +9,6 @@ using MPI
 
 
 
-# === Importing Sub-Scripts ===
-
-#include("format_data.jl")
-#include("plot_data.jl")
-
-
 # === Main variables ===
 
 const nb_cores = 32
@@ -35,10 +29,6 @@ function main()
     run(sim_command)
 
     @info "Simulations completed!"
-
-    #FormatData.main(nb_cores, save_file_sim, save_file_data)
-
-    #PlotData.main(save_file_data, save_fig_path)
 
     @info "All done!"
 

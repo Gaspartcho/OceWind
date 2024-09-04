@@ -67,7 +67,7 @@ function main(model, duration, filename, show_sim = false)
 	simulation.output_writers[:field_writer] = NetCDFOutputWriter(
 		model,
 		outputs,
-		schedule = TimeInterval(1minute),
+		schedule = TimeInterval(2hour),
 		filename = filename,
 		overwrite_existing = true
 	)

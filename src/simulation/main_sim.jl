@@ -20,11 +20,10 @@ include("simulation.jl")
 
 # === Constant Variables
 
-const filepath = "results/data/ocean_wind_mixing_and_convection"
-const world_size = 128
-const duration = 60
+const filepath = "results/data/ocean_wind_mixing_and_convection_large.nc"
+const world_size = 256
+const duration = 1200
 const show_objects = true
-const time_result_path = "results/logs/time.txt"
 
 
 # === Main Function ===
@@ -37,9 +36,7 @@ function main()
 
 	model = Model.main(grid, show_objects)
 
-	filename = string(filepath, ".nc") #so I can run multiple in parallell
-
-	simulation = Sim.main(model, duration, filename, show_objects)
+	simulation = Sim.main(model, duration, filepath, show_objects)
 
 	run!(simulation)
 

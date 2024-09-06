@@ -12,7 +12,6 @@ using MPI
 # === Importing Sub-Scripts ===
 
 include("format_data.jl")
-include("plot_data.jl")
 
 
 # === Main variables ===
@@ -28,11 +27,11 @@ const save_file_data = "results/data/formated_data.nc"
 const save_fig_path = "results/visuals/figs_"
 
 
-# === Main Function
+# === Main Function ===
 
 function main()
 
-	#run(sim_command)
+    #run(sim_command)
 
     @info "Simulations completed!"
 
